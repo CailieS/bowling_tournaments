@@ -123,6 +123,7 @@ DEPENDENCIES
   capybara
   database_cleaner!
   pry
+  rack
   rack-test
   rake
   require_all
