@@ -1,4 +1,4 @@
-class Teams < ActiveRecord::Base
+class Team < ActiveRecord::Base
     has_secure_password
     has_many :tournament
 
