@@ -1,5 +1,10 @@
 class TournamentsController < ApplicationController
     get '/tournaments/new' do 
-        "render the tournaments"
+        erb :'/tournaments/new'
+       
+    end
+
+    post '/tournaments' do
+        "Process our form"
     end
 end

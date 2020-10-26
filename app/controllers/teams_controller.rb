@@ -1,16 +1,16 @@
+
  class TeamsController < ApplicationController
  
    
-    get '/team/signup' do
+    get '/team/new' do
        erb :'/teams/signup'
     end       
     
-    post '/team/signup' do
+    post '/team' do
       params.inspect
-        #params[:teamname]
-        #params[:password]
-        @team = Team.create(teamname: params[:teamname], password: params[:password])
-      redirect "/team/#{@team.id}"
+       #@team = Team.create(teamname: params[:teamname], password: params[:password])
+        #binding.pry
+      #redirect "/team/#{@team.id}"
     end 
   
     get '/team/:id' do 
