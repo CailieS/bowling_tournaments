@@ -21,7 +21,12 @@
      end 
 
    #   get 'team/login' do
-   #     erb :'/team/login'
+   #     if !logged_in?
+            #erb :'/team/login'
+     #     
+         #else
+           # @team = Team.find(session[:teams_id])
+            #redirect "/team/#{@team.id}"
    #   end
 
    #  post 'team/login' do
@@ -40,5 +45,10 @@
         #show page
         @team = Team.find(params[:id])
         erb :'/teams/show'
+    end
+
+    get '/team/logout' do
+       sessions.clear
+       redirect '/'
     end
  end

@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
   Helpers do
     def logged_in?
-
+      !!sessions[:teams_id]
     end
   end
 
