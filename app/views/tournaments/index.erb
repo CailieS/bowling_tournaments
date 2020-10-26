@@ -1,0 +1,8 @@
+<% @tournament.each do |tournament| %>
+    
+    Tournament Number: <%= tournament.id%>
+    Name: <%= tournament.name %>
+    Location:<%= tournament.location %>
+    Date: <%= tournament.date %>
+    Teamname: <%= tournament.team.teamname %>
+    <% end %>

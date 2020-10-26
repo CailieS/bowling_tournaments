@@ -3,7 +3,7 @@
  
    
     get '/team/new' do
-       erb :'/teams/signup'
+       erb :'/teams/new'
     end       
     
     post '/team' do
