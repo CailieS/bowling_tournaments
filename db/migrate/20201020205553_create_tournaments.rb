@@ -4,7 +4,7 @@ class CreateTournaments < ActiveRecord::Migration
       t.string :name
       t.string :location
       t.string :date
-      t.integer :teams_id
+      t.integer :user_id
       t.timestamps null: false
     end
   end

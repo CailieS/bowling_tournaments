@@ -15,17 +15,17 @@ class TournamentsController < ApplicationController
 
     get '/tournament/:id' do
         @tournament = Tournament.find(params[:id])
-        erb :'tournaments/show'
+        erb :'tournament/show'
     end
 
     get '/tournament' do
         @tournaments = Tournament.all
-        erb :'/tournaments/index'
+        erb :'/tournament/index'
     end
 
     get '/tournament/:id/edit' do
         @tournament = Tournament.find(params[:id])
-        erb :'/tournaments/edit'
+        erb :'/tournament/edit'
     end
 
     post '/tournament/:id' do

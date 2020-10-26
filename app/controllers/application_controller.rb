@@ -13,10 +13,10 @@ class ApplicationController < Sinatra::Base
     erb :'welcome'
   end
 
-  Helpers do
-    def logged_in?
-      !!sessions[:teams_id]
-    end
-  end
+  # Helper do
+  #   def logged_in?
+  #     sessions
+  #   end
+  # end
 
 end
