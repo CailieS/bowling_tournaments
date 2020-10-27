@@ -12,38 +12,39 @@ class TournamentsController < ApplicationController
             date: params[:date]
             
                     )
-                    
-        redirect "/tournament/#{@tournament.id}"
-    end
-
-    get '/tournament/:id' do
-        @tournament = Tournament.find(params[:id])
-        erb :'tournaments/show'
+            redirect "/tournament/#{@tournament.id}"
     end
 
     get '/tournament' do
         @tournaments = Tournament.all
-        erb :'/tournaments/index'
+        erb :'tournaments/index'
     end
-
-    get '/tournament/:id/edit' do
+    
+    get '/tournament/:id' do
         @tournament = Tournament.find(params[:id])
-        erb :'/tournaments/edit'
+        #binding.pry
+        erb :'tournaments/show'
     end
 
-    post '/tournament/:id' do
+    patch '/tournament/:id' do
         @tournament = Tournament.find(params[:id])
         @tournament.update(
-        address: params[:address], 
+        name: params[:name], 
         location: params[:location], 
         date: params[:date]
                 )
-        redirect "/tournament/#{@tournament.id}"
+        redirect "/tournaments/#{@tournament.id}"
     end
 
-   delete '/tournament/:id' do
+    post '/tournament/:id/edit' do
         @tournament = Tournament.find(params[:id])
-        @tournament.destroy
+        #binding.pry
+        erb :'tournaments/edit'
+    end
+
+   delete '/tournament/:id/delete' do
+        @tournament = Tournament.find(params[:id])
+        @tournament.delete
     redirect '/tournament'
    end 
 

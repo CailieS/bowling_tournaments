@@ -1,8 +1,16 @@
-Name: <% @tournament.name %><br>
-Location: <% @tournament.location %><br>
-Date: <% @tournament.date %><br>
+<li>Name: <% @tournament.name %></li>
+<li>Location: <% @tournament.location %></li>
+<li>Date: <% @tournament.date %></li>
 
-<form method="post" action="/tournament/<%= @tournament.id%>">
+<form method="post" action="/tournament/<%= @tournament.id%>/edit">
+ <input type="submit" value="edit">
+</form>
+
+<form method="post" action="/tournament/<%= @tournament.id%>/delete">
  <input id="hidden" type="hidden" name="_method" value="DELETE">
  <input type="submit" value="delete">
+</form>
+
+<form method="get" action="/tournament">
+ <input type="submit" value="tournaments">
 </form>

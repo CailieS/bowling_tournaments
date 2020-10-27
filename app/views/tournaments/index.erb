@@ -1,8 +1,10 @@
+<h1> Here are all the bowling tournaments in your area!</h1>
 <% @tournaments.each do |tournament| %>
+   <h3> <a href="/tournament/<%= tournament.id%>"</h3>
     Tournament Number: <%= tournament.id%>
-    <li>Name: <%= tournament.name %></li>
-    <li>Location:<%= tournament.location %></li>
-    <li>Date: <%= tournament.date %></li>
-    <li>Teamname: <%= tournament.name %></li>
+   <%= tournament.name %></li></h3>
+   
 
 <% end%>
+
+  
