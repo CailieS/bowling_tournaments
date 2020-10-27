@@ -29,19 +29,20 @@ require 'pry'
    end
 
     post 'team/login' do
-       @team = Team.find_by(teamname: params[:name])
+       @team = Team.find_by(name: params[:name])
        if @team && @team.authenticate(params[:password])
          session[:user_id] = @team.id
          redirect '/team/#{@team.id}'
       else
-         redirect '/user/login'
+         redirect '/team/login'
       end
    end
 
   
     get '/team/:id' do 
         #show page
-        @team = Team.find(params[:id])
+        @team = Team.find_by(params[:id])
+        #binding.pry
         erb :'/teams/show'
     end
 
