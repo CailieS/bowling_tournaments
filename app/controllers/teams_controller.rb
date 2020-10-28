@@ -1,54 +1,42 @@
 require 'pry'
  class TeamsController < ApplicationController
  
+   get '/team/new' do
+      erb :'/teams/new'
+   end 
+
+   post '/team' do
+      @team = Team.create(email: params[:email], password: params[:password], name: params[:teamname])
+      session[:user_id] = @team.id
+      redirect "/team/#{@team.id}"
+   end 
    
-    get '/team/new' do
-       erb :'/teams/new'
-    end       
-    
-    post '/team' do
-      #params.inspect
-       @team = Team.create(email: params[:email], password: params[:password], name: params[:teamname])
-         # if @team.name == "" && @team.password == ""
-         #    redirect "/team/new"
-         # else
-         #    @team.save
-         # end
-       session[:user_id] = @team.id
-       #binding.pry
-       redirect "/team/#{@team.id}"
-     end 
-
-   get 'team/login' do
-      #if !logged_in?
-            erb :'/teams/login'
-   #    else
-   #         @team = Team.find(session[:user_id])
-   #          redirect "/team/#{@team.id}"
-   #   end
+   get '/team/login' do
+      if logged_in?
+         @team = Team.find(session[:id])
+         redirect "/team/#{@team.id}"
+      else
+         erb :'/teams/login'
+      end
+   end
+   
+   post '/team/login' do
+      @team = Team.find_by(teamname: param[:teamname])
+      if @team && @team.authenticate(params[:password])
+         session[:user_id] = @team.id
+         redirect "/team/#{@team.id}"
+      else
+         redirect "/team/login"
+      end
    end
 
-    post 'team/login' do
-      #  @team = Team.find_by(name: params[:name])
-      #  if @team && @team.authenticate(params[:password])
-      #    session[:user_id] = @team.id
-         
-      #    redirect '/teams/#{@team.id}'
-      # else
-         redirect '/teams/login'
-      #end
+   get '/team/:id' do 
+      @team = Team.find_by(params[:id])
+      erb :'/teams/show'
    end
 
-  
-    get '/team/:id' do 
-        #show page
-        @team = Team.find_by(params[:id])
-        #binding.pry
-        erb :'/teams/show'
-    end
-
-    get '/team/logout' do
+   get '/team/logout' do
        session.clear
        redirect '/'
-    end
+   end
   end
