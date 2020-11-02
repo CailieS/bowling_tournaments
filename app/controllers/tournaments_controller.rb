@@ -5,7 +5,7 @@ class TournamentsController < ApplicationController
        
     end
 
-    post '/tournament' do
+    post '/tournaments' do
         @tournament = Tournament.create(
             name: params[:name], 
             location: params[:location], 
@@ -16,9 +16,10 @@ class TournamentsController < ApplicationController
     get '/tournament' do
         @tournaments = Tournament.all
         erb :'tournaments/index'
+       
     end
     
-    get '/tournament/:id' do
+    get '/tournaments/:id' do
         @tournament = Tournament.find(params[:id])
         erb :'tournaments/show'
     end
@@ -34,12 +35,13 @@ class TournamentsController < ApplicationController
         @tournament.location = params[:location], 
         @tournament.date = params[:date]
         @tournament.save
-        redirect "/tournaments/#{@tournament.id}"
+        redirect "/tournament/#{@tournament.id}"
+    
     end
 
    delete '/tournament/:id/delete' do
         @tournament = Tournament.find(params[:id])
-        @tournament.delete
+        @tournament.destroy
         redirect '/tournament'
    end 
 

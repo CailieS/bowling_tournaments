@@ -1,10 +1,13 @@
 <h1> Here are all the bowling tournaments in your area!</h1>
 <% @tournaments.each do |tournament| %>
-   <h3> <a href="/tournament/<%= tournament.id%>"</h3>
+   <h3> <a href="/tournaments/<%= tournament.id%>"</h3>
     Tournament Number: <%= tournament.id%>
    <%= tournament.name %></li></h3>
    
+   
 
 <% end%>
+<form method="get" action="/team/logout">
+ <input type="submit" value="logout">
 
   

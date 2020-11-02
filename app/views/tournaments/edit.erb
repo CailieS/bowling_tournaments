@@ -1,7 +1,7 @@
 <h1>This is the Tournaments form </h1>
 
-<form action='/tournament/<%= #{@tournament.id} %>' method="post">
-    <input id="hidden" type="hidden" name="_method" value="PATCH">
+<form action='/tournaments/:id <%= #{@tournament.id} %>' method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
     <li>Name: <input type=text name="name" value="<% @tournament.name %>"></li>
     <li>Location: <input type=text name="location" value="<% @tournament.location %>"></li>
     <li>Date: <input type=integer name="date" value="<% @tournament.date %>"></li>
