@@ -14,14 +14,17 @@ class ApplicationController < Sinatra::Base
     erb :'welcome'
   end
   
-  # helpers do
-  #   def current_user
-  #    Team.find_by(id: session[:team_id])
-  #   end
+  helpers do
 
-  #   def self.is_logged_in?(session)
-  #     !!session[:team_id]
-  #   end
-  # end
+    def current_user
+      binding.pry
+      @current_user ||= Team.find(session[:user_id]) if session[:user_id]
+    end
+
+    def logged_in?
+     !!current_user
+    end
+
+  end
 
 end

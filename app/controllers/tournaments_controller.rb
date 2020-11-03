@@ -1,35 +1,36 @@
 require 'pry'
 class TournamentsController < ApplicationController
-    get '/tournament/new' do 
-        erb :'/tournaments/new'
-       
+
+
+    get '/tournaments' do
+        @tournaments = Tournament.all
+        erb :'tournaments/index'
     end
+
+    get '/tournaments/new' do 
+        erb :'/tournaments/new'
+    end
+
 
     post '/tournaments' do
         @tournament = Tournament.create(
             name: params[:name], 
             location: params[:location], 
             date: params[:date] )
-            redirect "/tournament/#{@tournament.id}"
+            redirect "/tournaments/#{@tournament.id}"
     end
 
-    get '/tournament' do
-        @tournaments = Tournament.all
-        erb :'tournaments/index'
-       
-    end
-    
     get '/tournaments/:id' do
-        @tournament = Tournament.find(params[:id])
+        @tournament = Tournament.find_by(params[:user_id])
         erb :'tournaments/show'
     end
 
-    get '/tournament/:id/edit' do
+    get '/tournaments/:id/edit' do
         @tournament = Tournament.find(params[:id])
         erb :'tournaments/edit'
     end
 
-    patch '/tournament/:id' do
+    patch '/tournaments/:id' do
         @tournament = Tournament.find(params[:id])
         @tournament.name = params[:name]
         @tournament.location = params[:location], 
@@ -39,7 +40,7 @@ class TournamentsController < ApplicationController
     
     end
 
-   delete '/tournament/:id/delete' do
+   delete '/tournaments/:id/delete' do
         @tournament = Tournament.find(params[:id])
         @tournament.destroy
         redirect '/tournament'

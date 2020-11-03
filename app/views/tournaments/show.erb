@@ -2,20 +2,20 @@
 <li>Location: <% @tournament.location %></li>
 <li>Date: <% @tournament.date %></li>
 
-<form method="post" action="/tournament/<%= @tournament.id%>/edit">
+<form method="post" action="/tournaments/<%= @tournament.id%>/edit">
  <input type="submit" value="edit">
 </form>
 
-<form method="post" action="/tournament/<%= @tournament.id%>/delete">
+<form method="post" action="/tournaments/<%= @tournament.id%>/delete">
  <input id="hidden" type="hidden" name="_method" value="DELETE">
  <input type="submit" value="delete">
 </form>
 
-<form method="get" action="/tournament">
+<form method="get" action="/tournaments">
  <input type="submit" value="tournaments">
 </form>
 
-<form method="get" action="/team/logout">
+<form method="get" action="/teams/logout">
  <input type="submit" value="logout">
 </form>
 
