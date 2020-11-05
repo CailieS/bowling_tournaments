@@ -2,18 +2,21 @@
 <li>Location: <% @tournament.location %></li>
 <li>Date: <% @tournament.date %></li>
 
-<form method="post" action="/tournaments/<%= @tournament.id%>/edit">
- <input type="submit" value="edit">
-</form>
-
+<%# <form method="post" action="/tournaments/<%= @tournament.id%>
+ <%# <input type="submit" value="edit"> %>
+<%# </form> %> 
+<% if logged_in?%>
 <form method="post" action="/tournaments/<%= @tournament.id%>/delete">
  <input id="hidden" type="hidden" name="_method" value="DELETE">
  <input type="submit" value="delete">
+ <form method="get" action="/teams/logout">
+ <input type="submit" value="logout">
 </form>
+</form>
+<% else %>
+<a href="/tournaments"> Tournaments </a>
 
-<form method="get" action="/tournaments">
- <input type="submit" value="tournaments">
-</form>
+<% end %>
 
 <form method="get" action="/teams/logout">
  <input type="submit" value="logout">

@@ -1,6 +1,6 @@
-<h1>This is the Tournaments form </h1>
+<h1>Please make any necessary updates to your tournament here! </h1>
 
-<form action='/tournaments/:id <%= #{@tournament.id} %>' method="post">
+<form action='/tournaments/ <%= "#{@tournament.id}" %>/edit' method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <li>Name: <input type=text name="name" value="<% @tournament.name %>"></li>
     <li>Location: <input type=text name="location" value="<% @tournament.location %>"></li>

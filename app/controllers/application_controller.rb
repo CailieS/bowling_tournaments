@@ -2,24 +2,21 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
   
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-    enable :sessions
-    set :session_secret, 'hella_secret_session'
-    #register Sinatra::Flash
-  end
+  register Sinatra::ActiveRecordExtension
+  enable :sessions
+  set :session_secret, "password_security"
+  set :views, Proc.new { File.join(root, "../views/") }
 
   get "/" do
     erb :'welcome'
   end
   
-  helpers do
 
-    def current_user
-      binding.pry
+
+  def current_user
+      #binding.pry
       @current_user ||= Team.find(session[:user_id]) if session[:user_id]
-    end
+  end
 
     def logged_in?
      !!current_user
@@ -27,4 +24,3 @@ class ApplicationController < Sinatra::Base
 
   end
 
-end

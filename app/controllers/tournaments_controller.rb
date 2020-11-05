@@ -13,21 +13,31 @@ class TournamentsController < ApplicationController
 
 
     post '/tournaments' do
+        #@team = find
         @tournament = Tournament.create(
             name: params[:name], 
             location: params[:location], 
-            date: params[:date] )
-            redirect "/tournaments/#{@tournament.id}"
+            date: params[:date],
+            user_id: session[:user_id])
+            #redirect "/tournaments/#{@tournament.id}"
+            erb :'/tournaments/show'
     end
 
     get '/tournaments/:id' do
-        @tournament = Tournament.find_by(params[:user_id])
+        @tournament = Tournament.find_by_id(params[:id])
+        #binding.pry
         erb :'tournaments/show'
     end
 
     get '/tournaments/:id/edit' do
-        @tournament = Tournament.find(params[:id])
-        erb :'tournaments/edit'
+        @tournament = Tournament.find_by_id(params[:id])
+        #binding.pry
+        @team = Team.find_by_id(session[:user_id])
+      if logged_in? && @team == current_user
+        erb :'/tournaments/edit'
+      else
+        redirect to '/tournaments'
+      end
     end
 
     patch '/tournaments/:id' do
@@ -36,14 +46,15 @@ class TournamentsController < ApplicationController
         @tournament.location = params[:location], 
         @tournament.date = params[:date]
         @tournament.save
-        redirect "/tournament/#{@tournament.id}"
+        redirect "/tournaments/#{@tournament.id}"
     
     end
 
    delete '/tournaments/:id/delete' do
-        @tournament = Tournament.find(params[:id])
-        @tournament.destroy
-        redirect '/tournament'
+     #binding.pry
+        @tournament = Tournament.find_by_id(params[:id])
+        @tournament.delete
+        redirect '/tournaments'
    end 
 
 
