@@ -1,4 +1,24 @@
+Bowling Tournaments Sinatra Project
 
+Welcome to the Bowling Tournaments Sinatra project! You can register your team, see tournaments in your area, and add to the list of tournaments in your area! 
+
+Have fun and happy bowling!
+
+Instructions
+
+Clone the respository into your terminal
+
+cd into the bowling_tournaments directory
+
+Run Bundle Install in your terminal
+
+Run shotgun in your terminal
+
+Follow the link provided in your favorite browser
+
+
+
+The Business
 MIT License
 Copyright (c) 2020 CailieS
 Permission is hereby granted, free of charge, to any person obtaining a copy
