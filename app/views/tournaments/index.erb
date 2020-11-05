@@ -4,10 +4,12 @@
     Tournament Number: <%= tournament.id%>
    <%= tournament.name %></li></h3>
    
-   
-
 <% end%>
+<form method="get" action="/tournaments/new">
+ <input type="submit" value="Create Tournaments">
+</form>
 <form method="get" action="/teams/logout">
  <input type="submit" value="logout">
+ </form>
 
   

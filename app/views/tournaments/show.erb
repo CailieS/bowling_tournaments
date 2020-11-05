@@ -1,27 +1,35 @@
-<li>Name: <% @tournament.name %></li>
-<li>Location: <% @tournament.location %></li>
-<li>Date: <% @tournament.date %></li>
+<li>Name: <%= @tournament.name %></li>
+<li>Location: <%= @tournament.location %></li>
+<li>Date: <%= @tournament.date %></li>
 
 <%# <form method="post" action="/tournaments/<%= @tournament.id%>
  <%# <input type="submit" value="edit"> %>
 <%# </form> %> 
-<% if logged_in?%>
+<% if logged_in? %>
 <form method="post" action="/tournaments/<%= @tournament.id%>/delete">
  <input id="hidden" type="hidden" name="_method" value="DELETE">
  <input type="submit" value="delete">
- <form method="get" action="/teams/logout">
- <input type="submit" value="logout">
  </form>
+
+ <a  href="/tournaments/<%= @tournament.id %>/edit"> edit </a>
+
+<form method="get" action="/tournaments">
+ <input type="submit" value="View Tournaments">
+</form>
+
 <% else %>
+
 <form method="get" action="/tournaments">
  <input type="submit" value="View Tournaments">
 </form>
 <form method="get" action="/tournaments/new">
  <input type="submit" value="Create Tournaments">
 </form>
-<% end %>
-
 <form method="get" action="/teams/logout">
  <input type="submit" value="logout">
 </form>
+
+<% end %>
+
+
 

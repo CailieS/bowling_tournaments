@@ -27,23 +27,16 @@ require 'pry'
    end 
     
     get '/teams/:id' do
-      @team = Team.find_by(name: params[:name])
+      @team = Team.find(params[:id])
+      #binding.pry
       erb :'/teams/show'
    end
-   
-   # post '/teams/signup' do
-   #    @team = Team.create(email: params[:email], password: params[:password], name: params[:name])
-   #    session[:user_id] = @team.id
-   #    #flash[:message] = "welcome back #{@team.name}"
-   #    erb :'/teams/show'
-   # end 
+
 
    post '/teams/login' do
-     
-      @team = Team.find_by(name: params[:name])
-      #binding.pry
+     @team = Team.find_by(name: params[:name])
+      
       if @team && @team.authenticate(params[:password])
-         
          session[:user_id] = @team.id
          #flash[:message] = "Welcome back #{@team.name} "
          redirect "/teams/#{@team.id}"

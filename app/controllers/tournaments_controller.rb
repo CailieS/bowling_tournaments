@@ -30,24 +30,26 @@ class TournamentsController < ApplicationController
     end
 
     get '/tournaments/:id/edit' do
-        @tournament = Tournament.find_by_id(params[:id])
-        #binding.pry
+        
         @team = Team.find_by_id(session[:user_id])
+        #binding.pry
       if logged_in? && @team == current_user
         erb :'/tournaments/edit'
       else
-        redirect to '/tournaments'
+        redirect '/tournaments'
       end
     end
 
     patch '/tournaments/:id' do
+    #     if current_user == tournament.teams
+        
         @tournament = Tournament.find(params[:id])
         @tournament.name = params[:name]
         @tournament.location = params[:location], 
         @tournament.date = params[:date]
         @tournament.save
         redirect "/tournaments/#{@tournament.id}"
-    
+    # end
     end
 
    delete '/tournaments/:id/delete' do
