@@ -30,9 +30,9 @@ class TournamentsController < ApplicationController
     end
 
     get '/tournaments/:id/edit' do
+      @tournament = Tournament.find_by_id(params[:id])
+      @team = Team.find_by_id(session[:user_id])
         
-        @team = Team.find_by_id(session[:user_id])
-        #binding.pry
       if logged_in? && @team == current_user
         erb :'/tournaments/edit'
       else
@@ -40,16 +40,18 @@ class TournamentsController < ApplicationController
       end
     end
 
-    patch '/tournaments/:id' do
-    #     if current_user == tournament.teams
-        
+    patch '/tournaments/:id/edit' do
+      
         @tournament = Tournament.find(params[:id])
-        @tournament.name = params[:name]
-        @tournament.location = params[:location], 
-        @tournament.date = params[:date]
-        @tournament.save
+        
+        @tournament.update(
+          name: params[:name], 
+          location: params[:location], 
+          date: params[:date])
+          #binding.pry
         redirect "/tournaments/#{@tournament.id}"
-    # end
+       
+    
     end
 
    delete '/tournaments/:id/delete' do
