@@ -6,13 +6,8 @@ require 'pry'
    end 
 
    get '/teams/login' do
-      # if session[:user_id]
-      #     @team = Team.find(session[:user_id])
-      #     redirect "/teams/#{@team.id}"
-      #  else
-          erb :'/teams/login'
-      # end
-    end
+      erb :'/teams/login'
+   end
 
     get '/teams/logout' do
       session.clear

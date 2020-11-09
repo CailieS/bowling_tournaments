@@ -2,10 +2,8 @@
 <li>Location: <%= @tournament.location %></li>
 <li>Date: <%= @tournament.date %></li>
 
-<%# <form method="post" action="/tournaments/<%= @tournament.id%>
- <%# <input type="submit" value="edit"> %>
-<%# </form> %> 
-<% if logged_in? %>
+
+<% if logged_in? && @tournament.user_id == current_user.id%>
 <form method="post" action="/tournaments/<%= @tournament.id%>/delete">
  <input id="hidden" type="hidden" name="_method" value="DELETE">
  <input type="submit" value="delete">
