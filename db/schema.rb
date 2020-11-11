@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20201020205553) do
     t.string   "name"
     t.string   "location"
     t.string   "date"
-    t.integer  "user_id"
+    t.integer  "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,3 +1,4 @@
+
 require 'pry'
  class TeamsController < ApplicationController
  
@@ -14,21 +15,20 @@ require 'pry'
       redirect '/'
     end
     
-    post '/teams/signup' do
-
-     if invalid_credentials?(params)
-      redirect '/teams/signup'
-     else
-      @team = Team.create(email: params[:email], password: params[:password], name: params[:name])
-      session[:user_id] = @team.id
-      #flash[:message] = "welcome back #{@team.name}"
-      erb :'/teams/show' 
+   post '/teams/signup' do
+      if invalid_credentials?(params)
+         #flash[:message] = "Looks like you entered something wrong! Please try again."
+         redirect '/teams/signup'
+      else
+         @team = Team.create(email: params[:email], password: params[:password], name: params[:name])
+         session[:user_id] = @team.id
+         #flash[:message] = "welcome back #{@team.name}"
+         erb :'/teams/show' 
      end
    end 
     
     get '/teams/:id' do
       @team = Team.find(params[:id])
-      #binding.pry
       erb :'/teams/show'
    end
 

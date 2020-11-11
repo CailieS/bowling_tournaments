@@ -12,12 +12,16 @@ class TournamentsController < ApplicationController
   end
 
   post '/tournaments' do
+    empty_params = empty_fields?(params)
+    if empty_params
+      redirect '/tournaments'
+    else
     @tournament = Tournament.create(
         name: params[:name], 
         location: params[:location], 
         date: params[:date],
-        user_id: session[:user_id])
-    erb :'/tournaments/show'
+        team_id: session[:team_id])
+    end
   end
 
   get '/tournaments/:id' do
@@ -28,20 +32,27 @@ class TournamentsController < ApplicationController
   get '/tournaments/:id/edit' do
     @tournament = Tournament.find_by_id(params[:id])
     @team = Team.find_by_id(session[:user_id])
-    if logged_in? && @team == current_user
-        erb :'/tournaments/edit'
+    #binding.pry
+    if @tournament.team_id != @team.id
+      redirect '/tournaments'
     else
-        redirect '/tournaments'
+        erb :'/tournaments/edit'
     end
   end
 
+ 
   patch '/tournaments/:id/edit' do
     @tournament = Tournament.find(params[:id])
+    #start writing a conditional if the current team is the tournament. if true redirect to index page.
+    #write error if incorrect
     @tournament.update(
       name: params[:name], 
       location: params[:location], 
       date: params[:date])
     redirect "/tournaments/#{@tournament.id}"
+    
+      erb :'tournaments/index'
+    
   end
 
    delete '/tournaments/:id/delete' do
