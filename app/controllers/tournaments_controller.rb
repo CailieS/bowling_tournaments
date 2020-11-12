@@ -32,7 +32,6 @@ class TournamentsController < ApplicationController
   get '/tournaments/:id/edit' do
     @tournament = Tournament.find_by_id(params[:id])
     @team = Team.find_by_id(session[:user_id])
-    #binding.pry
     if @tournament.team_id != @team.id
       redirect '/tournaments'
     else
@@ -43,8 +42,6 @@ class TournamentsController < ApplicationController
  
   patch '/tournaments/:id/edit' do
     @tournament = Tournament.find(params[:id])
-    #start writing a conditional if the current team is the tournament. if true redirect to index page.
-    #write error if incorrect
     @tournament.update(
       name: params[:name], 
       location: params[:location], 
