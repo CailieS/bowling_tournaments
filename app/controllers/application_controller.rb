@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
 
 
   def current_user
-   @current_user ||= Team.find(session[:user_id]) if session[:user_id]
+   @current_user ||= Team.find(session[:team_id]) if session[:team_id]
   end
 
   def logged_in?

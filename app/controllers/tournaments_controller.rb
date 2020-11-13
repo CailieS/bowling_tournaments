@@ -4,10 +4,12 @@ class TournamentsController < ApplicationController
 
   get '/tournaments' do
     @tournaments = Tournament.all
+   
     erb :'tournaments/index'
   end
 
   get '/tournaments/new' do 
+    #binding.pry
     erb :'/tournaments/new'
   end
 
@@ -16,11 +18,14 @@ class TournamentsController < ApplicationController
     if empty_params
       redirect '/tournaments'
     else
+      
     @tournament = Tournament.create(
         name: params[:name], 
         location: params[:location], 
         date: params[:date],
         team_id: session[:team_id])
+        #binding.pry
+      redirect '/tournaments'
     end
   end
 
@@ -30,8 +35,11 @@ class TournamentsController < ApplicationController
   end
 
   get '/tournaments/:id/edit' do
+    
+  
     @tournament = Tournament.find_by_id(params[:id])
-    @team = Team.find_by_id(session[:user_id])
+    @team = Team.find_by_id(session[:team_id])
+    
     if @tournament.team_id != @team.id
       redirect '/tournaments'
     else
@@ -46,8 +54,7 @@ class TournamentsController < ApplicationController
       name: params[:name], 
       location: params[:location], 
       date: params[:date])
-    redirect "/tournaments/#{@tournament.id}"
-    
+      redirect "/tournaments/#{@tournament.id}"
       erb :'tournaments/index'
     
   end

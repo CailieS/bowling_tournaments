@@ -21,7 +21,7 @@ require 'pry'
          redirect '/teams/signup'
       else
          @team = Team.create(email: params[:email], password: params[:password], name: params[:name])
-         session[:user_id] = @team.id
+         session[:team_id] = @team.id
          #flash[:message] = "welcome back #{@team.name}"
          erb :'/teams/show' 
      end
@@ -37,7 +37,7 @@ require 'pry'
      @team = Team.find_by(name: params[:name])
       
       if @team && @team.authenticate(params[:password])
-         session[:user_id] = @team.id
+         session[:team_id] = @team.id
          #flash[:message] = "Welcome back #{@team.name} "
          redirect "/teams/#{@team.id}"
       else
