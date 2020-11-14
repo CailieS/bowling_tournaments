@@ -11,8 +11,6 @@ class ApplicationController < Sinatra::Base
     erb :'welcome'
   end
   
-
-
   def current_user
    @current_user ||= Team.find(session[:team_id]) if session[:team_id]
   end
